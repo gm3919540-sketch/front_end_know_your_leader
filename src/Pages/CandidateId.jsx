@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import api from '../Api/axios';
-import { getCandidateById } from '../Api/CandidateApi';
+import { getCandidateById, getCandidateSummary } from '../Api/CandidateApi';
 import cand1 from '../Images/cand.jpg'
 
 export const CandidateId = () => {
 
-    const{ id } =  useParams();
+    const{ id} =  useParams();
+  
+    
     const [Candidate, setCandidate] = useState(null);
+    const [Summary, setSummary] = useState(null);
+    const [loadingSummary, setLoadingSummary] = useState(false);
+    const handleSummary = async (id)=>{
+      try{
+        setLoadingSummary(true);
+        const d = await getCandidateSummary(id)
+        setSummary(d);
+        console.log(d);
+      }catch(error){
+  console.log("Error:", error);
+      }finally{
+        setLoadingSummary(false);
+      }
+    }
+
     console.log(id);
     useEffect(()=>{
         const fetchCandidate = async(id)=>{
@@ -34,12 +51,18 @@ export const CandidateId = () => {
     <div className="bg-white shadow-xl rounded-2xl w-[90%] max-w-5xl p-8 flex gap-8">
 
       {/* Left Side Image */}
-      <div className="w-1/3 flex justify-center">
+      <div className="w-1/3 flex justify-center flex-col">
         <img
           className="w-64 h-64 rounded-2xl object-cover shadow-md"
-          src={cand1}
+          src={Candidate.ImageUrl}
           alt="Candidate"
         />
+        <div className='flex gap-4'>
+        <a href={`http://localhost:8081/api/candidate/profile/${id}`}>
+          Download Profile
+           </a>
+           <p onClick={()=>handleSummary(id)}>Ai magic</p>
+           </div>
       </div>
 
       {/* Right Side Details */}
@@ -91,7 +114,16 @@ export const CandidateId = () => {
       </div>
 
     </div>
+    {loadingSummary && <h1>Getting info...</h1>}
+
+{Summary && (
+  <div className="mt-6 bg-white p-6 rounded-xl shadow-md w-[90%] max-w-5xl">
+    <h2 className="text-2xl font-semibold mb-2">User Summary</h2>
+    <p className="text-gray-700">{Summary}</p>
   </div>
+)}
+  </div>
+ 
 </>
   )
 }

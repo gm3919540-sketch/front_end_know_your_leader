@@ -28,7 +28,7 @@ export const ALLPROFILE = () => {
                 <Link to={`/candidate/${e.id}`} key={`${e.id}`}>
               <div className='flex gap-4 justify-center align-center '>
             <div className='h-[20vh] w-[20vh] bg-blue-500'>
-                <img  className='h-[100%] w-[100%] object-fit'  src={cand1} alt="" />
+                <img  className='h-[100%] w-[100%] object-fit'  src={e.ImageUrl} alt="" />
             </div>
             <div className='bg-gray-500 h-[20vh] w-[40vh] rounded-xl px-2'>
                 <h1 className='text-[3vh]'>Name : {e.name}</h1>

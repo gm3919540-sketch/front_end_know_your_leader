@@ -6,8 +6,7 @@ import { CandidateId } from './Pages/CandidateId'
 
 function App() {
   return (
-  <>
-   
+  <>   
    <Routes>
     <Route path='/' element ={<Home />} ></Route>
     <Route path='/candidate/:id' element ={<CandidateId />}></Route>

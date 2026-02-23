@@ -12,8 +12,7 @@ export const Nav = () => {
     
         <Link to ="/Login" >
         <Button variant='outline' >Login</Button>
-        </Link>
-        
+        </Link>        
     </div>
   )
 }
