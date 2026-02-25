@@ -3,6 +3,7 @@ import './App.css'
 import  { Button, buttonVariants } from './components/ui/button'
 import { Home } from './Pages/Home'
 import { CandidateId } from './Pages/CandidateId'
+import SearchBox from './Pages/SearchBox'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
     <Route path='/' element ={<Home />} ></Route>
     <Route path='/candidate/:id' element ={<CandidateId />}></Route>
    </Routes>
+
   </>
   )
 }

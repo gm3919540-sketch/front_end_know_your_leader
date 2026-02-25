@@ -1,27 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import cand1 from '../Images/cand.jpg'
-import { getAllCandidate } from '../Api/CandidateApi';
+import { filter, getAllCandidate } from '../Api/CandidateApi';
 import { Link } from 'react-router-dom';
+import SearchBox from './SearchBox';
 export const ALLPROFILE = () => {
     
     const [cand, setcand] = useState([]);
+    const [allCand, setAllCand] = useState([]); 
     const [err, setErr] = useState("");
-    useEffect(()=>{
-        const fetAllCandidate = async ()=>{
-         try{
-          const b = await getAllCandidate();
-          console.log(b);
-            setcand(b);
-         } catch{
-             setErr("failed to fetch candidate");
-         }
+    useEffect(() => {
+    fetchAll();
+  }, []);
+    const fetchAll = async () => {
+    const data = await getAllCandidate();
+    setcand(data);
+    setAllCand(data);
+  };
 
-        };
-        fetAllCandidate();
-        },[]);
+  const handleSearch = async (name, party, state, constituency) => {
+
+    const data = await filter(
+      name || null,
+      party || null,
+      state || null,
+      constituency || null
+    );
+
+    setcand(data);
+  };
+  const handleReset = () => {
+    setcand(allCand);
+  };
   
 
   return (
+    <>
+
+        <SearchBox onSearch={handleSearch} onReset={handleReset} />
+    
     <div className=' w-screen h-[80vh] px-3 py-3 flex'>
         <div className='flex   flex-wrap  gap-4 px-4'>
             {cand.map((e,i)=>(
@@ -44,5 +60,6 @@ export const ALLPROFILE = () => {
 
         </div>
     </div>
+    </>
   )
 }

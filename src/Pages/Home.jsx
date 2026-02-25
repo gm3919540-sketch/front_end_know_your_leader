@@ -1,6 +1,7 @@
 import React from 'react'
 import { Nav } from './Nav'
 import { ALLPROFILE } from './ALLPROFILE'
+import SearchBox from './SearchBox'
 
 export const Home = () => {
   return (
