@@ -12,6 +12,8 @@ export const CandidateId = () => {
     const [Candidate, setCandidate] = useState(null);
     const [Summary, setSummary] = useState(null);
     const [loadingSummary, setLoadingSummary] = useState(false);
+    const [celection,Setcelection] = useState(null);
+    const  [loadingcelection,setloadingcelection] = useState(false);
     const handleSummary = async (id)=>{
       try{
         setLoadingSummary(true);
@@ -122,6 +124,13 @@ export const CandidateId = () => {
     <p className="text-gray-700">{Summary}</p>
   </div>
 )}
+   
+   {loadingcelection && <h1>Getting election....</h1>}
+
+   {celection && (
+    <div>
+      </div>
+   )}
   </div>
  
 </>

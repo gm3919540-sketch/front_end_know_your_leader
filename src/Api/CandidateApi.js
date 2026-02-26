@@ -1,8 +1,8 @@
 import api from "./axios"
 
-export const getAllCandidate = async()=>{
+export const getAllCandidate = async(page=0,size=9)=>{
  const response = await api.get(
-    `/api/candidate/allCandidatedata`
+    `/api/candidate/allCandidatedata?page=${page}&size=${size}`
  );
  return response.data;
 } 
