@@ -1,16 +1,42 @@
-# React + Vite
+Know Your Leader – Frontend
+Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the frontend application for the Know Your Leader platform.
+The frontend provides a user-friendly interface that allows users to explore political leader profiles and view AI-generated summaries of public records.
 
-Currently, two official plugins are available:
+The frontend communicates with the backend through REST APIs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Features
 
-## React Compiler
+• Browse and explore political leader profiles
+• View AI-generated summaries of public information
+• Responsive and interactive user interface
+• REST API integration with backend services
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Tech Stack
 
-## Expanding the ESLint configuration
+Frontend Framework ->React.js
+Languages->JavaScript,HTML,CSS,API Communication,REST APIs,JSON
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Application Workflow->
+
+User interacts with React interface
+↓
+Frontend sends request to backend APIs
+↓
+Backend processes request and retrieves data
+↓
+AI APIs generate summaries when needed
+↓
+Frontend displays results to the user
+
+Backend Repository
+
+Backend services are available here:
+
+https://github.com/gm3919540-sketch/Know_Your_Leader
+
+
+
+
+
