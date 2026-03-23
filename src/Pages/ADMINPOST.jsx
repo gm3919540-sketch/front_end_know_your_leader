@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   createCandidate,
   createElection,
   createElectionResult,
 } from "../Api/AdminApi";
 import { Button } from "../components/ui/button";
+import { fetchAllState, fetchAllYear, fetchConstituencyNameByDistrict, fetchDistrictByState, getId } from "../Api/Constituencyapi";
 
 
 export const ADMINPOST = () => {
@@ -20,13 +21,13 @@ export const ADMINPOST = () => {
 
   /* Constituency */
 
-  const [ContituncyName, setContituncyName] = useState("");
-  const [district, setdistrict] = useState("");
-  const [state, setstate] = useState("");
+  const [ContituncyName, setContituncyName] = useState([]);
+  const [district, setdistrict] = useState([]);
+  const [state, setstate] = useState([]);
 
   /*Election*/
 
-  const [year, setyear] = useState("");
+  const [year, setyear] = useState([]);
   const [electionType, setelectionType] = useState("");
 
   /* Election Result*/
@@ -124,6 +125,60 @@ export const ADMINPOST = () => {
     }
   };
 
+  useEffect( ()=>{
+    const getStates=async ()=>{
+      try{
+        const respons = await fetchAllState();
+        setstate(respons)
+      }catch(err){
+        console.log(err);
+      }
+    }
+      const getYear = async()=>{
+       try{
+        const response = await fetchAllYear();
+        setyear(response);
+       }catch(err){
+        console.log(err);
+       }
+  }
+    getStates();
+    getYear();
+  },[])
+
+ const getDistrict = async(e)=>{
+   console.log("STATE SELECTED:", e);  
+          try{
+            const response = await fetchDistrictByState(e);
+            console.log(response)
+            setdistrict(response);
+          }catch(err){
+            console.log(err);
+          }
+  }
+  
+  const getConstituency = async(e)=>{
+          try{
+            const respons = await fetchConstituencyNameByDistrict(e);
+            setContituncyName(respons)
+            console.log(respons);
+          }catch(err){
+            console.log(err);
+          }
+  }
+
+  const getConstituencyID = async(e)=>{
+         try{
+            const respons = await getId(e);
+            setContituncyName(respons)
+            console.log(respons);
+          }catch(err){
+            console.log(err);
+          }
+  }
+
+
+
   return (
     
     <>
@@ -184,9 +239,49 @@ export const ADMINPOST = () => {
           <option value="ASSEMBLY"> Assembly</option>
 
         </select>
+        
+        <select className="input"
+          onChange={(e) => setelectionType(e.target.value)}>
 
-        <input className="input" type="number" placeholder="Constituency ID"
-          onChange={(e) => setContituncyId(e.target.value)} />
+          <option value="">Election Year</option>
+           {year.map((e,i)=>(
+              <option value="" key={i}>{e}</option>
+
+           ))}
+
+        </select>
+
+        <select className="input"
+        onChange={(e)=>getDistrict(e.target.value)}
+         >
+          <option value="">State</option>
+          {state.map((e,i)=>(
+            
+          <option value={e} key={i}>{e}</option>
+          ))}
+
+        </select>
+
+        <select className="input"
+        onChange={(e)=>getConstituency(e.target.value)}
+         >
+          <option value="">District</option>
+          {district.map((e,i)=>(
+            
+          <option value={e} key={i}>{e}</option>
+          ))}
+        </select>
+
+        <select className="input"
+        onChange={(e)=>getConstituencyID(e.target.value)}
+         >
+          <option value="">Constituency</option>
+          {ContituncyName.map((e,i)=>(
+          <option value={e} key={i}>{e}</option>
+          ))}
+        </select>
+
+        
 
         <input className="input" type="number" placeholder="Votes Received"
           onChange={(e) => setvotesreceived(e.target.value)} />
