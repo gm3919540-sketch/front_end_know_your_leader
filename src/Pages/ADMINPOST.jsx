@@ -27,14 +27,15 @@ export const ADMINPOST = () => {
 
   /*Election*/
 
-  const [year, setyear] = useState([]);
-  const [electionType, setelectionType] = useState("");
+ const [year, setYear] = useState([]);   // for dropdown list
+const [selectedYear, setSelectedYear] = useState(""); // user selection
 
   /* Election Result*/
 
   const [candidateId, setcandidateId] = useState("");
   // const [electionId, setelectionId] = useState("");
   const [constituencyId, setContituncyId] = useState("");
+  const [electionType,setelectionType ] = useState("");
 
   const [votesrecived, setvotesreceived] = useState("");
   const [resultStatus, SetresultStatus] = useState("");
@@ -75,7 +76,7 @@ export const ADMINPOST = () => {
   const HandleElection = async () => {
 
     const ElectionDto = {
-      year: year,
+      year: selectedYear,
       electionType: electionType,
     };
 
@@ -96,8 +97,8 @@ export const ADMINPOST = () => {
       candidateId: Number(candidateId),
       // electionId: Number(electionId),
       electionType: electionType,
-      electionYear:year,
-      constituencyId: Number(constituencyId),
+      electionYear:selectedYear,
+      constituency_Id: Number(constituencyId),
 
       votes_received: Number(votesrecived),
       resultStatus: resultStatus,
@@ -118,6 +119,7 @@ export const ADMINPOST = () => {
     };
 
     try {
+      console.log("Sending:", ElectionResultDto);
       const res = await createElectionResult(ElectionResultDto);
       console.log("Election Result Posted:", res);
     } catch (err) {
@@ -137,7 +139,7 @@ export const ADMINPOST = () => {
       const getYear = async()=>{
        try{
         const response = await fetchAllYear();
-        setyear(response);
+        setYear(response);
        }catch(err){
         console.log(err);
        }
@@ -169,8 +171,11 @@ export const ADMINPOST = () => {
 
   const getConstituencyID = async(e)=>{
          try{
+             console.log("Input:", e);
+
             const respons = await getId(e);
-            setContituncyName(respons)
+   console.log("Response (ID):", respons);
+            setContituncyId(respons);
             console.log(respons);
           }catch(err){
             console.log(err);
@@ -235,17 +240,17 @@ export const ADMINPOST = () => {
           onChange={(e) => setelectionType(e.target.value)}>
 
           <option value="">Select Election Type</option>
-          <option value="LOK_SABHA">Lok_Sabha</option>
-          <option value="ASSEMBLY"> Assembly</option>
+          <option value="Lok_Sabha">Lok_Sabha</option>
+<option value="Assembly">Assembly</option>
 
         </select>
         
         <select className="input"
-          onChange={(e) => setelectionType(e.target.value)}>
+          onChange={(e) => setSelectedYear(Number(e.target.value))}>
 
           <option value="">Election Year</option>
            {year.map((e,i)=>(
-              <option value="" key={i}>{e}</option>
+              <option value={e} key={i}>{e}</option>
 
            ))}
 

@@ -10,12 +10,12 @@ import Login from './Pages/Login'
 function App() {
   return (
   <>   
-   <Routes>
+   {/* <Routes>
     <Route path='/' element ={<Home />} ></Route>
     <Route path='/candidate/:id' element ={<CandidateId />}></Route>
     <Route path='/Login' element={<Login/>}></Route>
-   </Routes>
-   {/* <ADMINPOST></ADMINPOST> */}
+   </Routes> */}
+   <ADMINPOST></ADMINPOST>
 
   </>
   )

@@ -16,7 +16,7 @@ export const fetchConstituencyNameByDistrict = async(district) =>{
     const response = await api.get(`/api/constituencies/by-district/${district}`);
     return response.data;
 }
-export const getId = async(id)=>{
+export const getId = async(constituency)=>{
     const response = await api.get(`api/constituencies/getIdByConstitency/${constituency}`);
     return response.data;
 }
