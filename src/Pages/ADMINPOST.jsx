@@ -6,6 +6,7 @@ import {
 } from "../Api/AdminApi";
 import { Button } from "../components/ui/button";
 import { fetchAllState, fetchAllYear, fetchConstituencyNameByDistrict, fetchDistrictByState, getId } from "../Api/Constituencyapi";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 export const ADMINPOST = () => {
@@ -181,6 +182,11 @@ const [selectedYear, setSelectedYear] = useState(""); // user selection
             console.log(err);
           }
   }
+  const navigate = useNavigate();
+  const handlogout=()=>{
+    localStorage.clear();
+    navigate("/");
+  }
 
 
 
@@ -189,8 +195,10 @@ const [selectedYear, setSelectedYear] = useState(""); // user selection
     <>
     
     <div className="flex flex-col  bg-gray-100  items-center min-h-screen w-full px-2 py-4 gap-4">
-    <div>
+    <div className="flex justify-between w-full">
+      <h1></h1>
       <h1 className="text-center font-bold bg-gray-100 ">Admin DashBoard</h1>
+      <Button onClick={()=>handlogout()} variant="destructive" >Logout</Button>
       </div>
       
     

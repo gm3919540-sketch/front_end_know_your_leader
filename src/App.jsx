@@ -6,16 +6,20 @@ import { CandidateId } from './Pages/CandidateId'
 import SearchBox from './Pages/SearchBox'
 import { ADMINPOST } from './Pages/ADMINPOST'
 import Login from './Pages/Login'
+import protectedroute from './ProtectedRoute/protectedroute'
 
 function App() {
   return (
   <>   
-   {/* <Routes>
+   <Routes>
     <Route path='/' element ={<Home />} ></Route>
     <Route path='/candidate/:id' element ={<CandidateId />}></Route>
     <Route path='/Login' element={<Login/>}></Route>
-   </Routes> */}
-   <ADMINPOST></ADMINPOST>
+    <Route path='/admin'element={<protectedroute>
+      <ADMINPOST />
+    </protectedroute>} />
+   </Routes>
+ 
 
   </>
   )

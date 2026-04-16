@@ -10,33 +10,63 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import login from "../Images/loginimg.png";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { loginUser } from "../Api/AdminApi"
 
 export function LoginForm({
   className,
   ...props
 }) {
+    const [email, setemail] = useState("");
+    const [Password, setPassword] = useState("");
+    const navigate = useNavigate();
+    
+    const handleLogin =async(e)=>{
+      e.preventDefault();
+      try{
+        const data = await loginUser(email,Password);
+         
+        localStorage.setItem("token",data.token);
+        localStorage.setItem("role",data.role);
+        if(data.role =="ADMIN"){
+          navigate("/admin");
+        }else{
+          navigate("/");
+        }
+
+      }catch(err){
+        alert("Invalid credentials");
+      }
+    };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form onSubmit={handleLogin} className="p-6 md:p-8">
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
                 <p className="text-balance text-muted-foreground">
-                  Login to your Acme Inc account
+                  Login to your Admin account
                 </p>
               </div>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input id="email" type="email" placeholder="m@example.com" required />
+                <Input id="email" type="email" placeholder="m@example.com" 
+                value={email}
+                onChange={(e)=>setemail(e.target.value)}
+                required />
               </Field>
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
                  
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" type="password" value={Password}
+                onChange={(e)=>setPassword(e.target.value)}
+                required />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>

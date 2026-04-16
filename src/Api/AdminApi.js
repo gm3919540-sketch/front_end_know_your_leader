@@ -20,3 +20,12 @@ export const createElectionResult = async (resultDto) => {
   const response = await api.post("/admin/electionresults", resultDto);
   return response.data;
 };
+
+export const loginUser = async (email, password) => {
+  const response = await api.post("/admin/login", {
+    email,
+    password
+  });
+
+  return response.data;
+};
