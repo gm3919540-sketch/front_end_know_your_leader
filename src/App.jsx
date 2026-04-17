@@ -12,15 +12,15 @@ import Table from './Pages/TablePage'
 function App() {
   return (
   <>   
-   {/* <Routes>
+   <Routes>
     <Route path='/' element ={<Home />} ></Route>
     <Route path='/candidate/:id' element ={<CandidateId />}></Route>
     <Route path='/Login' element={<Login/>}></Route>
     <Route path='/admin'element={<protectedroute>
       <ADMINPOST />
     </protectedroute>} />
-   </Routes> */}
-   <Table></Table>
+   </Routes>
+   {/* <Table></Table> */}
  
 
   </>
