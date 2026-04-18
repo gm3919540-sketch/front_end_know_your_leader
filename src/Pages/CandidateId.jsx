@@ -74,7 +74,7 @@ export const CandidateId = () => {
           alt="Candidate"
         />
         <div className='flex gap-4 flex-col mt-4 items-center md:items-start'>
-        <a href={`http://localhost:8081/api/candidate/profile/${id}`}>
+        <a href={`https://knowyourleader-production.up.railway.app/${id}`}>
           Download Profile
            </a>
            <p onClick={()=>handleSummary(id)}>Ai magic</p>
